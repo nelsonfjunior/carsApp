@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
-import { useRoute } from '@react-navigation/native'; // Adicionando o hook useRoute
+import { useRoute } from "@react-navigation/native"; // Adicionando o hook useRoute
 import { DrawerToggleButton } from "@react-navigation/drawer";
 
 interface CarModel {
@@ -36,36 +36,28 @@ export default function Model() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View className="flex-1 justify-center items-center bg-gray-100">
+        <ActivityIndicator size="large" color="#3498db" />
+        <Text className="mt-4 text-lg text-gray-500">Carregando...</Text>
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, padding: 16, backgroundColor: "#f0f0f0" }}>
+    <View className="flex-1 bg-gray-100 px-4 py-4">
       <DrawerToggleButton />
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}>Modelos</Text>
+      <Text className="text-3xl font-bold text-gray-800 mb-6">Models</Text>
       <FlatList
         data={modelos}
         keyExtractor={(item) => item.codigo}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={{
-              padding: 16,
-              backgroundColor: "#fff",
-              borderRadius: 8,
-              marginBottom: 8,
-              shadowColor: "#000",
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-              elevation: 2,
-            }}
-            onPress={() => alert(`Modelo selecionado: ${item.nome}`)}
+            className="p-4 bg-white rounded-lg mb-4 shadow-sm border border-gray-200"
           >
-            <Text style={{ fontSize: 18 }}>{item.nome}</Text>
+            <Text className="text-lg text-gray-800">{item.nome}</Text>
           </TouchableOpacity>
         )}
+        contentContainerStyle={{ paddingBottom: 16 }}
       />
     </View>
   );

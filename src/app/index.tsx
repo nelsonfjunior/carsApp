@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -12,16 +12,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../context/AuthContext";
 import axios, { AxiosError } from "axios";
 import { useNavigation } from "@react-navigation/native";
-import "nativewind";
 import { HomeNavigationProp } from "../navigation/navigation";
 
-// Definir a estrutura esperada para os dados do formulário
+// Estrutura esperada para os dados do formulário
 interface SignInFormData {
   user: string;
   password: string;
 }
 
-// Definir o tipo para os dados da resposta de erro
+// Tipo para os dados da resposta de erro
 interface SignInErrorResponse {
   error: boolean;
   message: string;
@@ -30,7 +29,7 @@ interface SignInErrorResponse {
 export default function SignIn() {
   const { setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation<HomeNavigationProp>(); // Adicionar navegação
+  const navigation = useNavigation<HomeNavigationProp>();
 
   const {
     control,
@@ -48,12 +47,11 @@ export default function SignIn() {
     try {
       const response = await axios.post("https://test-api-y04b.onrender.com/signIn", data);
 
-      // Verificar status da resposta
       if (response.status === 200) {
         const { error, message, user } = response.data;
 
         if (error) {
-          Alert.alert("Login Failed", message); // Exibe a mensagem de erro da API
+          Alert.alert("Login Failed", message);
         } else {
           await AsyncStorage.setItem("userData", JSON.stringify(user));
           setUser(user);
@@ -63,11 +61,9 @@ export default function SignIn() {
         Alert.alert("Error", "Something went wrong. Please try again later.");
       }
     } catch (err) {
-      // Verifique se o erro é um AxiosError e afirme o tipo de resposta
       if (axios.isAxiosError(err)) {
-        const axiosErr = err as AxiosError<SignInErrorResponse>; // Afirma que a resposta tem o tipo esperado
+        const axiosErr = err as AxiosError<SignInErrorResponse>;
         if (axiosErr.response) {
-          // Aqui podemos acessar o conteúdo da resposta com segurança
           const message = (axiosErr.response.data as SignInErrorResponse).message || "An error occurred";
           Alert.alert("Error", message);
         } else {
@@ -83,7 +79,7 @@ export default function SignIn() {
 
   return (
     <View className="flex-1 justify-center items-center p-5 bg-gray-100">
-      <Text className="text-2xl font-bold mb-5">Login</Text>
+      <Text className="text-2xl font-bold mb-5 text-gray-800">Login</Text>
 
       <Controller
         control={control}
@@ -91,7 +87,7 @@ export default function SignIn() {
         rules={{ required: "Username is required" }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
+            className="w-full p-3 mb-3 border border-gray-300 rounded bg-white text-gray-700"
             placeholder="Username"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -107,7 +103,7 @@ export default function SignIn() {
         rules={{ required: "Password is required" }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            className="w-full p-3 mb-3 border border-gray-300 rounded bg-white"
+            className="w-full p-3 mb-3 border border-gray-300 rounded bg-white text-gray-700"
             placeholder="Password"
             secureTextEntry
             onBlur={onBlur}
@@ -119,7 +115,8 @@ export default function SignIn() {
       {errors.password && <Text className="text-red-500 mb-3">{errors.password.message}</Text>}
 
       <TouchableOpacity
-        className={`w-full p-4 bg-blue-500 rounded items-center ${loading ? "opacity-50" : ""}`}
+        className={`w-full p-4 bg-blue-500 rounded items-center ${loading ? "opacity-50" : ""
+          }`}
         onPress={handleSubmit(onSubmit)}
         disabled={loading}
       >
