@@ -14,13 +14,11 @@ import axios, { AxiosError } from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { HomeNavigationProp } from "../navigation/navigation";
 
-// Estrutura esperada para os dados do formulário
 interface SignInFormData {
   user: string;
   password: string;
 }
 
-// Tipo para os dados da resposta de erro
 interface SignInErrorResponse {
   error: boolean;
   message: string;

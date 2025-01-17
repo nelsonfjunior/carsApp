@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { IndexNavigationProp, ModelNavigationProp } from "@/src/navigation/navigation";
-import { AuthContext } from "@/src/context/AuthContext"; // Importe o contexto
+import { AuthContext } from "@/src/context/AuthContext";
 import { DrawerToggleButton } from "@react-navigation/drawer";
 
 interface CarBrand {
@@ -33,7 +33,7 @@ export default function Home() {
         );
         setBrands(response.data);
       } catch (error) {
-        Alert.alert("Erro", "Não foi possível carregar as marcas de carros.");
+        Alert.alert("Error", "Failed to load car brands.");
       } finally {
         setLoading(false);
       }
@@ -43,7 +43,7 @@ export default function Home() {
   }, []);
 
   const handleBrandPress = (codigo: string) => {
-    navigation.navigate("screens/Model", { marcaCodigo: codigo });
+    navigation.navigate("screens/Model", { brandCode: codigo });
   };
 
   const handleLogout = async () => {
@@ -55,7 +55,7 @@ export default function Home() {
     return (
       <View className="flex-1 justify-center items-center bg-gray-100">
         <ActivityIndicator size="large" color="#3498db" />
-        <Text className="mt-4 text-lg text-gray-500">Carregando...</Text>
+        <Text className="mt-4 text-lg text-gray-500">Loading...</Text>
       </View>
     );
   }

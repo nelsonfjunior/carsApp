@@ -2,7 +2,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 export type RootDrawerParamList = {
     "screens/Home": undefined;
-    "screens/Model": { marcaCodigo: string; };
+    "screens/Model": { brandCode: string; };
     "screens/docEdificacao": { id: string };
     "index": undefined;
   };

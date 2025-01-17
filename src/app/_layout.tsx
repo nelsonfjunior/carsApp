@@ -1,29 +1,31 @@
 import '../styles/global.css';
 import 'react-native-gesture-handler';
-import { Slot } from "expo-router";
 import { Drawer } from 'expo-router/drawer';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { AuthProvider } from "../context/AuthContext"; // Importe o AuthProvider
+import { AuthProvider } from "../context/AuthContext";
 
 export default function RootLayout() {
   return (
-    <AuthProvider> 
-      <GestureHandlerRootView style={{ flex: 1 }}>
+    <AuthProvider>
+      <GestureHandlerRootView className="flex-1">
         <Drawer
           screenOptions={{
             headerShown: false,
             drawerStyle: {
-              backgroundColor: '#005490',
+              backgroundColor: '#f8fafc', 
               width: 240,
             },
             drawerLabelStyle: {
-              color: '#fff',
+              fontSize: 16,
+              fontWeight: '600',
             },
+            drawerActiveTintColor: '#3b82f6', 
+            drawerInactiveTintColor: '#9ca3af',
           }}
         >
           <Drawer.Screen
-            name="index" // This is the name of the page and must match the url from root
+            name="index"
             options={{
               drawerLabel: 'Login',
               drawerItemStyle: { display: 'none' },
@@ -31,14 +33,14 @@ export default function RootLayout() {
           />
 
           <Drawer.Screen
-            name="screens/Home" // This is the name of the page and must match the url from root
+            name="screens/Home"
             options={{
               drawerLabel: 'Home',
             }}
           />
 
           <Drawer.Screen
-            name="screens/Model" // This is the name of the page and must match the url from root
+            name="screens/Model"
             options={{
               drawerLabel: 'Model',
             }}

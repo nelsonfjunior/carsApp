@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
-import { useRoute } from "@react-navigation/native"; // Adicionando o hook useRoute
+import { useRoute } from "@react-navigation/native"; 
 import { DrawerToggleButton } from "@react-navigation/drawer";
 
 interface CarModel {
@@ -9,9 +9,8 @@ interface CarModel {
 }
 
 export default function Model() {
-  // Usando useRoute para acessar os parâmetros da rota
   const route = useRoute();
-  const { marcaCodigo } = route.params as { marcaCodigo: string };
+  const { brandCode } = route.params as { brandCode: string };
 
   const [modelos, setModelos] = useState<CarModel[]>([]);
   const [loading, setLoading] = useState(true);
@@ -20,25 +19,25 @@ export default function Model() {
     const fetchModels = async () => {
       try {
         const response = await fetch(
-          `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaCodigo}/modelos`
+          `https://parallelum.com.br/fipe/api/v1/carros/marcas/${brandCode}/modelos`
         );
         const data = await response.json();
         setModelos(data.modelos);
       } catch (error) {
-        console.error("Erro ao buscar os modelos:", error);
+        console.error("Error fetching the models:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchModels();
-  }, [marcaCodigo]);
+  }, [brandCode]);
 
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center bg-gray-100">
         <ActivityIndicator size="large" color="#3498db" />
-        <Text className="mt-4 text-lg text-gray-500">Carregando...</Text>
+        <Text className="mt-4 text-lg text-gray-500">Loading...</Text>
       </View>
     );
   }
