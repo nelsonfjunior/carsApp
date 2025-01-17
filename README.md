@@ -28,7 +28,7 @@ No terminal, execute o comando abaixo para instalar as dependências do projeto:
    npm install
    ```
 
-### 2. Iniciar o projeto utilizando expo
+### 2. Iniciar o projeto utilizando Expo
 
    ```bash
     npx expo start
