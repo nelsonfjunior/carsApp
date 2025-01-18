@@ -11,6 +11,7 @@ Este aplicativo foi desenvolvido como parte de um desafio de desenvolvedor mobil
 - **React Navigation**: Biblioteca para navegação entre as telas do aplicativo.
 - **Nativewind**: Usado para estilização da interface.
 - **Fetch API**: Para consumir as APIs de login e dados dos carros.
+- **React Hook Form**: Biblioteca para gerenciar os formulários de login de maneira eficiente e escalável.
 
 ## Funcionalidades
 
